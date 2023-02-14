@@ -4,7 +4,7 @@ import Livre from "../Livre.js";
 import livre from "./livre.vue";
 
 const listeC = reactive([]);
-const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/12/livres"
+const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/16/livres"
 
 
 function handlerAjouter(Li) {

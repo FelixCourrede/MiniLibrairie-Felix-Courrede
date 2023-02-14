@@ -17,7 +17,7 @@ defineProps(["Livre"]);
         </td>
         <td>
             <button @click="$emit('retirerC', Livre.id)">-</button>
-            {{ livre.afficherQuantité }}
+            {{ Livre.afficherQuantité }}
             <button @click="$emit('ajouterC', Livre.id)">+</button>
         </td>
     </tr>
