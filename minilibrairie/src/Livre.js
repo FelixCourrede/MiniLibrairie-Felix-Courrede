@@ -1,4 +1,3 @@
-// une chose
 export default class Livre {
     constructor(titre, quantité, prix) {
       this._titre=titre;

@@ -3,21 +3,21 @@ import Livre from '../Livre.js';
 import { defineEmits } from 'vue';
 import { defineProps } from 'vue';
 const emit = defineEmits(["retirerC", "ajouterC"]);
-defineProps(["Livre"]);
+defineProps(["livre"]);
 </script>
 
 
 <template>
     <tr>
         <td>
-            {{ Livre.afficherTitre }}
+            {{ livre.afficherTitre() }}
         </td>
         <td>
-            {{ Livre.afficherPrix }}
+            {{ livre.afficherPrix() }}
         </td>
         <td>
             <button @click="$emit('retirerC', Livre.id)">-</button>
-            {{ Livre.afficherQuantité }}
+            {{ livre.afficherQuantité() }}
             <button @click="$emit('ajouterC', Livre.id)">+</button>
         </td>
     </tr>

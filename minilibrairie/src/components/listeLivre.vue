@@ -1,10 +1,10 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import Livre from "../Livre.js";
-import livre from "./livre.vue";
+import livreItem from "./livreItem.vue";
 
 const listeC = reactive([]);
-const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/16/livres"
+const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/14/livres"
 
 
 function handlerAjouter(Li) {
@@ -63,7 +63,8 @@ function getLivres() {
     .then((dataJSON) => {
       console.log(dataJSON);
       listeC.splice(0, listeC.length);
-      dataJSON.forEach((v) => listeC.push(new Livre(v.titre, v.quantité, v.prix)));
+      dataJSON.forEach((v) => listeC.push(new Livre(v.titre, v.qtestock, v.prix)));
+      console.log(listeC)
     })
 
     .catch((error) => console.log(error));
@@ -73,16 +74,19 @@ onMounted(() => {
 });
 </script>
 
+
+
+
 <template>
     <table>
         <thead>
 
         </thead>
         <tbody>
-            <livre
-                v-for="Livre of listeC"
-                :key="Livre.id"
-                :Livre="Livre"
+            <livreItem
+                v-for="livre of listeC"
+                :key="livre.id"
+                :livre="livre"
                 @retirerC="handlerRetirer"
                 @ajouterC="handlerAjouter"
             />

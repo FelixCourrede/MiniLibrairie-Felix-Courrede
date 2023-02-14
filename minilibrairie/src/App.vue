@@ -1,5 +1,5 @@
 <script setup>
-import livre from './components/livre.vue';
+import livreItem from './components/livreItem.vue';
 import listeLivre from './components/listeLivre.vue';
 </script>
 
