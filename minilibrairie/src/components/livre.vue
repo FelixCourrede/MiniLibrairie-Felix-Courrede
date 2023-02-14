@@ -1,11 +1,24 @@
-<script>
+<script setup>
 import Livre from '../Livre.js';
-let livre = new Livre('Livre Test', 1, 1);
-console.log(livre.pourAfficher());
-console.log(livre.afficherTitre())
-console.log(livre.afficherQuantité())
-console.log(livre.afficherPrix())
+import { defineEmits } from 'vue';
+import { defineProps } from 'vue';
+const emit = defineEmits(["retirerC", "ajouterC"]);
+defineProps(["Livre"]);
 </script>
+
+
 <template>
-    
+    <tr>
+        <td>
+            {{ Livre.afficherTitre }}
+        </td>
+        <td>
+            {{ Livre.afficherPrix }}
+        </td>
+        <td>
+            <button @click="$emit('retirerC', Livre.id)">-</button>
+            {{ livre.afficherQuantité }}
+            <button @click="$emit('ajouterC', Livre.id)">+</button>
+        </td>
+    </tr>
 </template>
