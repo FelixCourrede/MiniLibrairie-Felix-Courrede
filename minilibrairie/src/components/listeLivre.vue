@@ -4,19 +4,24 @@ import Livre from "../Livre.js";
 import livreItem from "./livreItem.vue";
 
 const listeC = reactive([]);
-const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/14/livres"
+const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/14/livres";
 
 
 function handlerAjouter(Li) {
   console.log(Li);
+  let id=Li.id;
+  let titre=Li.titre;
+  let prix=Li.prix;
   Li.ajouterStock();
+  let qtestock=Li.quantité;
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const fetchOptions = {
     method: "PUT",
     headers: myHeaders,
-    body: JSON.stringify(Livre),
+    body: JSON.stringify({id: id, titre: titre, qtestock : qtestock, prix: prix }),
   };
+
   fetch(url, fetchOptions)
     .then((response) => {
       return response.json();
@@ -63,7 +68,7 @@ function getLivres() {
     .then((dataJSON) => {
       console.log(dataJSON);
       listeC.splice(0, listeC.length);
-      dataJSON.forEach((v) => listeC.push(new Livre(v.titre, v.qtestock, v.prix)));
+      dataJSON.forEach((v) => listeC.push(new Livre(v.id,v.titre, v.qtestock, v.prix)));
       console.log(listeC)
     })
 
@@ -78,6 +83,10 @@ onMounted(() => {
 
 
 <template>
+    <div>
+      <input />
+    </div>
+    
     <table>
         <thead>
 

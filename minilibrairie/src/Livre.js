@@ -1,5 +1,6 @@
 export default class Livre {
-    constructor(titre, quantité, prix) {
+    constructor(id, titre, quantité, prix) {
+      this._id=id;
       this._titre=titre;
       this._quantité=quantité;
       this._prix=prix;
@@ -8,10 +9,10 @@ export default class Livre {
       return this._titre;
     }
     get quantité() {
-      return this.quantité;
+      return this._quantité;
     }
     get prix() {
-      return this.prix;
+      return this._prix;
     }
   
     // modifier fait / pas fait
