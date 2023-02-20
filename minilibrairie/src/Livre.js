@@ -15,17 +15,21 @@ export default class Livre {
       return this._prix;
     }
   
-    // modifier fait / pas fait
     ajouterStock() {
       this._quantité = this._quantité+1;
     }
-    // modifier le texte
+
     supprimerStock() {
-      this._quantité = quantité-1;
+      this._quantité = this._quantité-1;
     }
+
+    afficherId(){
+      return`${this._id}`;
+    }
+
     afficherTitre(){
         return`${this._titre}`;
-    }
+    } 
     afficherQuantité(){
         return`${this._quantité}`;
     }
