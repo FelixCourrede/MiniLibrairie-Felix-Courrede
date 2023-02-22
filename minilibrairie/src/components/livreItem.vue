@@ -26,8 +26,9 @@ defineProps(["livre"]);
 <style>
     td{
         border-radius: 10px;
-        border-color: brown;
-        color:chartreuse;
+        color:rgb(255,140,0);
+        font-family: Papyrus, fantasy;
+        font-weight: bold;
     }
     button{
         margin-left: 20px;

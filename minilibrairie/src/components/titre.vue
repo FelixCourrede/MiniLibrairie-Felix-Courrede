@@ -12,10 +12,12 @@
     }
     h1{
         background-color: blue;
-        margin-bottom: 50px;
-        text-align: center;
-        border-width: 10px;
-        border-radius: 33%;
-        height:40%;
+        margin-bottom: 25px;
+        text-align: center; 
+        padding-top: 25px;
+        padding-bottom: 25px;
+        font-family: Brush Script MT, cursive;
+        font-weight: bolder;
+        font-size: 250%;
     }
 </style>

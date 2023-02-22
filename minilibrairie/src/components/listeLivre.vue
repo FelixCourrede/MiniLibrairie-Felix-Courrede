@@ -153,14 +153,18 @@ onMounted(() => {
 
 <template>
   <div class="recherche">
-    <input v-model="motclé" id="boutonRecherche" placeholder="Vous Cherchez..."/>
-    <button type="button" v-on:click="getLivreMotClé(motclé)"> Rechercher </button>
+    <input v-model="motclé" id="inputRecherche" placeholder="Vous Cherchez..."/>
+    <button type="button" id="buttonRecherche" v-on:click="getLivreMotClé(motclé)"> Rechercher </button>
   </div>
-    <div class="barreajout">
-      <form>
+    <div class="ajout">
+      Vous ne trouvez pas ce que vous cherchez? Ajoutez-le!
+      <form class="barreajout">
         <input v-model="titre" placeholder="Nom"/><input v-model="prix" placeholder="Prix"/>
         <button type="button" v-on:click="ajouterLivre(titre, prix)"> Ajouter </button>
       </form>
+    </div>
+    <div>
+      <img src="../assets/pngegg.png" id="imagePoisson">
     </div>
     
     <div>
@@ -190,11 +194,26 @@ onMounted(() => {
 #Tableau{
 display: block;
 position:absolute;
-top: 40%;
+top: 45%;
 left: 25%;
 }
 
-#boutonRecherche{
+.ajout{
+  font-family: Papyrus, fantasy;
+}
+
+
+.barreajout{
+  margin-top: 10px;
+}
+
+#imagePoisson{
+  position: absolute;
+  top: 140%;
+}
+
+#inputRecherche{
+  margin-top: 25px;
   width: 250px;
   margin-right: 40px;
 }
