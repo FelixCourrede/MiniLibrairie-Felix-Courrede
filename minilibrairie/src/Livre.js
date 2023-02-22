@@ -5,6 +5,10 @@ export default class Livre {
       this._quantité=quantité;
       this._prix=prix;
     }
+
+    get id(){
+      return this._id;
+    }
     get titre() {
       return this._titre;
     }

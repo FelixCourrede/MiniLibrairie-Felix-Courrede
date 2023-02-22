@@ -5,6 +5,7 @@ import livreItem from "./livreItem.vue";
 import { ref } from "vue";
 const titre = ref("");
 const prix = ref("");
+const motclé = ref("")
 
 const listeC = reactive([]);
 const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/14/livres";
@@ -38,9 +39,7 @@ function handlerAjouter(Li) {
 }
 
 function handlerRetirer(Li) {
-  console.log(Li);
   let id=Li._id;
-  console.log(id)
   let titre=Li.titre;
   let prix=Li.prix;
   if(Li.quantité>1){
@@ -85,7 +84,6 @@ function handlerRetirer(Li) {
 
 function ajouterLivre(Nom, prix){
   let cree= new Livre(Nom, prix)
-  console.log(cree);
   let myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const fetchOptions = {
@@ -104,6 +102,29 @@ function ajouterLivre(Nom, prix){
     .catch((error) => console.log(error));
 }
 
+function getLivreMotClé(idrecherche){
+  let lien=url+"?search="+idrecherche;
+  console.log(lien)
+  const fetchOptions = { method: "GET" };
+  fetch(lien, fetchOptions)
+    .then((response) => {
+      return response.json();
+    })
+
+    .then((dataJSON) => {
+      console.log(dataJSON);
+      listeC.splice(0, listeC.length);
+      dataJSON.forEach((v) => listeC.push(new Livre(v.id, v.titre, v.qtestock, v.prix)));
+      console.log(listeC)
+    })
+
+    .catch((error) => console.log(error));
+}
+
+function rejetRecherche(){
+  alert("Le livre recherché n'existe pas!")
+  getLivres()
+}
 
 function getLivres() {
   const fetchOptions = { method: "GET" };
@@ -131,16 +152,25 @@ onMounted(() => {
 
 
 <template>
-    <div>
+  <div class="recherche">
+    <input v-model="motclé" id="boutonRecherche" placeholder="Vous Cherchez..."/>
+    <button type="button" v-on:click="getLivreMotClé(motclé)"> Rechercher </button>
+  </div>
+    <div class="barreajout">
       <form>
-        <input v-model="titre" placeholder="Nom"/><input v-model="prix" placeholder="Prix">
+        <input v-model="titre" placeholder="Nom"/><input v-model="prix" placeholder="Prix"/>
         <button type="button" v-on:click="ajouterLivre(titre, prix)"> Ajouter </button>
       </form>
     </div>
     
-    <table>
+    <div>
+    <table id="Tableau">
         <thead>
-
+          <tr>
+            <th class="Titre">Titre</th>
+            <th class="Prix">Prix</th>
+            <th class="Quantité">Quantité En Stock</th>
+          </tr>
         </thead>
         <tbody>
             <livreItem
@@ -152,10 +182,27 @@ onMounted(() => {
             />
         </tbody>
     </table>
+    </div>
 </template>
 
 <style>
-table{
-  border-color: white;
+
+#Tableau{
+display: block;
+position:absolute;
+top: 40%;
+left: 25%;
+}
+
+#boutonRecherche{
+  width: 250px;
+  margin-right: 40px;
+}
+
+.recherche{
+  display: block;
+  position: absolute;
+  top: 35%;
+  left: 25%;
 }
 </style>

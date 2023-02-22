@@ -9,16 +9,35 @@ defineProps(["livre"]);
 
 <template>
     <tr>
-        <td>
+        <td class="Titre">
             {{ livre.afficherTitre() }}
         </td>
-        <td>
-            {{ livre.afficherPrix() }}
+        <td class="Prix">
+            {{ livre.afficherPrix() }} €
         </td>
-        <td>
+        <td class="Quantité">
             <button @click="$emit('retirerC', livre)">-</button>
             {{ livre.afficherQuantité() }}
             <button @click="$emit('ajouterC', livre)">+</button>
         </td>
     </tr>
 </template>
+
+<style>
+    td{
+        border-radius: 10px;
+        border-color: brown;
+        color:chartreuse;
+    }
+    button{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .Titre{
+        padding-right: 100px;
+    }
+
+    .Prix{
+        padding-right: 100px;
+    }
+</style>
