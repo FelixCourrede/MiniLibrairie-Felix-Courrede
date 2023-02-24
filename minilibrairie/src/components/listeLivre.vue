@@ -6,6 +6,7 @@ import { ref } from "vue";
 const titre = ref("");
 const prix = ref("");
 const motclé = ref("")
+const rechercheId = ref("")
 
 const listeC = reactive([]);
 const url ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/14/livres";
@@ -117,15 +118,26 @@ function getLivreMotClé(idrecherche){
       dataJSON.forEach((v) => listeC.push(new Livre(v.id, v.titre, v.qtestock, v.prix)));
       console.log(listeC)
     })
-
-    .catch((error) => console.log(error));
 }
 
-function rejetRecherche(){
-  alert("Le livre recherché n'existe pas!")
-  getLivres()
-}
+function getLivreId(id) {
+    const fetchOptions = {
+        method: 'GET'
 
+    }
+    console.log(url + '/' + id)
+    fetch(url + '/' + id, fetchOptions)
+        
+        .then((response) => {
+            return response.json();
+        })
+        .then((dataJSON) => {
+          console.log(dataJSON);
+            listeC.splice(0, listeC.length);
+            listeC.push(new Livre(dataJSON.id, dataJSON.titre, dataJSON.qtestock, dataJSON.prix));
+            console.log(listeC);
+        })
+    }
 function getLivres() {
   const fetchOptions = { method: "GET" };
   fetch(url, fetchOptions)
@@ -155,6 +167,9 @@ onMounted(() => {
   <div class="recherche">
     <input v-model="motclé" id="inputRecherche" placeholder="Vous Cherchez..."/>
     <button type="button" id="buttonRecherche" v-on:click="getLivreMotClé(motclé)"> Rechercher </button>
+  </div>
+  <div class="inputId">
+    <input v-model="rechercheId" placeholder="Recherche par Id"/><button type="button" id="buttonId" v-on:click="$event => getLivreId(rechercheId)"> Rechercher </button>
   </div>
     <div class="ajout">
       Vous ne trouvez pas ce que vous cherchez? Ajoutez-le!
@@ -194,14 +209,23 @@ onMounted(() => {
 #Tableau{
 display: block;
 position:absolute;
-top: 45%;
-left: 25%;
+top: 50%;
+left: 18%;
+background-color: rgb(150,150,150,0.6);
+padding-left: 50px;
+padding-right: 50px;
+border-radius: 3%;
 }
 
 .ajout{
   font-family: Papyrus, fantasy;
 }
 
+.inputId{
+  position: absolute;
+  left: 70%;
+  top: 30%;
+}
 
 .barreajout{
   margin-top: 10px;
@@ -209,11 +233,11 @@ left: 25%;
 
 #imagePoisson{
   position: absolute;
-  top: 140%;
+  top: 150%;
 }
 
 #inputRecherche{
-  margin-top: 25px;
+  margin-top: 40px;
   width: 250px;
   margin-right: 40px;
 }

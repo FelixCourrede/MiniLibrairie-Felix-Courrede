@@ -35,10 +35,10 @@ defineProps(["livre"]);
         margin-right: 20px;
     }
     .Titre{
-        padding-right: 100px;
+        padding-right: 120px;
     }
 
     .Prix{
-        padding-right: 100px;
+        padding-right: 120px;
     }
 </style>

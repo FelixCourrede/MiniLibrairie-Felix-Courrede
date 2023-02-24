@@ -7,9 +7,6 @@
 </template>
 
 <style>
-    html{
-
-    }
     h1{
         background-color: blue;
         margin-bottom: 25px;
@@ -19,5 +16,6 @@
         font-family: Brush Script MT, cursive;
         font-weight: bolder;
         font-size: 250%;
+        border-radius: 3%;
     }
 </style>
